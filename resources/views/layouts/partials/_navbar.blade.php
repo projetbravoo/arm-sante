@@ -8,7 +8,7 @@
                 <span></span>
                 </span>
             </a>
-            <a href="index.html" class="navbar-brand logo">
+            <a href="{{ route('home') }}" class="navbar-brand logo">
                 <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
             </a>
         </div>
@@ -146,7 +146,7 @@
                     <p class="contact-info-header"> +1 315 369 5943</p>
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link header-login" href="login.html">login / Signup </a>
+                    <a class="nav-link header-login" href="{{ route('login') }}">login / Signup </a>
                 </li>
             </li>
         </ul>
