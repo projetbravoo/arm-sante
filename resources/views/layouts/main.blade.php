@@ -1,5 +1,6 @@
 @include('layouts.partials._header')
 
+<body>
 <div class="main-wrapper">
 
     @include('layouts.partials._navbar')
