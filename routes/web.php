@@ -21,3 +21,4 @@ Route::view('/','welcome')->name('home');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 Route::get('/signup', [RegisterController::class, 'index'])->name('register');
+Route::post('/signup', [RegisterController::class, 'store'])->name('register.create');

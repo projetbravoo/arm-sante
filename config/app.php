@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Laravolt\Avatar\LumenServiceProvider::class,
 
         /*
          * Application Service Providers...
