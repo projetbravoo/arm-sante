@@ -132,6 +132,8 @@
 <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
 <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+
 <script src="assets/plugins/apex/apexcharts.min.js"></script>
 
 <script src="assets/plugins/select2/js/select2.min.js"></script>
@@ -151,10 +153,14 @@
 <script src="assets/js/slick.js"></script>
 
 <script src="assets/js/script.js"></script>
+
+<script>
+    @if (session('notify'))
+        @php echo notify(session('notify')) @endphp
+    @endif  
+</script>
+
 </body>
-
-<!-- Mirrored from doccure-laravel.dreamguystech.com/template/public/blank-page by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Dec 2021 10:18:47 GMT -->
-
 </html>
 <script>
     $(document).ready(function() {

@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Mail\AccountActivationEmail;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -39,7 +37,7 @@ class RegisterController extends Controller
         Mail::to($newUser)
             ->send(new AccountActivationEmail($newUser));
 
-        return redirect()->route('login')->with(['notify', 'success'], 'Account created, check mail for activation.');
+        return redirect()->route('login')->with('notify', ['Account created, check mail for activation.', 'success', 7000]);
     }
 
     public function activate(User $user, string $token)
@@ -50,10 +48,10 @@ class RegisterController extends Controller
 
             if($decryptedToken === $decryptedUserToken) {
                 $user->update(['status' => '1', 'verification_token' => '']);
-                return redirect()->route('login')->with(['notify', 'success'], 'Account activated');
+                return redirect()->route('login')->with('notify', ['Account activated', 'success']);
             }
         }
 
-        return redirect()->route('login')->with(['notify', 'error'], 'Invalid parameters');
+        return redirect()->route('login')->with('notify', ['Invalid parameters', 'error']);
     }
 }
