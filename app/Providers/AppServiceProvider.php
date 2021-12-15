@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -28,5 +30,7 @@ class AppServiceProvider extends ServiceProvider
             return Password::min(8)
                    ->mixedCase();
         });
+
+        User::observe(UserObserver::class);
     }
 }
