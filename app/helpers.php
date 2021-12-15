@@ -3,7 +3,7 @@
 if(!function_exists('notify')) {
     function notify(array $params): string
     {
-      $timer = $params[2] ?? 3000;
+      $timer = $params[2] ?? 5000;
 
       return "const Toast = Swal.mixin({
           toast: true,
