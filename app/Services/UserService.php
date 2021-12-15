@@ -2,9 +2,13 @@
 
 namespace App\Services;
 
+use App\Http\Requests\UserLoginRequest;
 use App\Models\User;
 use Laravolt\Avatar\Avatar;
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 
@@ -57,6 +61,24 @@ class UserService {
             return true;
         }
         return false;
+    }
+
+    public function login(UserLoginRequest $request): bool
+    {
+        if(!Auth::attempt(Arr::add($request->only('email', 'password'), 'status', '1'))) {
+            return false;
+        }
+
+        $request->session()->regenerate();
+        return true;
+    }
+
+    public function logout(Request $request): void
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
 
 }
