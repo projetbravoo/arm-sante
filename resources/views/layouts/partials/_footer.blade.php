@@ -6,7 +6,7 @@
 
                     <div class="footer-widget footer-about">
                         <div class="footer-logo">
-                            <img src="assets/img/footer-logo.png" alt="logo">
+                            <img src="{{ asset('img/footer-logo.png') }}" alt="logo">
                         </div>
                         <div class="footer-about-content">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -114,45 +114,45 @@
 
 </footer>
 <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="assets/js/jquery.min.js"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
 
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
-<script src="assets/plugins/swiper/js/swiper.min.js"></script>
+<script src="{{ asset('plugins/swiper/js/swiper.min.js') }}"></script>
 
-<script src="assets/js/moment.min.js"></script>
-<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="{{ asset('js/moment.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 
-<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="assets/plugins/fullcalendar/fullcalendar.min.js"></script>
-<script src="assets/plugins/fullcalendar/jquery.fullcalendar.js"></script>
+<script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('plugins/fullcalendar/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('plugins/fullcalendar/jquery.fullcalendar.js') }}"></script>
 
-<script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-<script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+<script src="{{ asset('plugins/theia-sticky-sidebar/ResizeSensor.js') }}"></script>
+<script src="{{ asset('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
 
-<script src="assets/plugins/apex/apexcharts.min.js"></script>
+<script src="{{ asset('plugins/apex/apexcharts.min.js') }}"></script>
 
-<script src="assets/plugins/select2/js/select2.min.js"></script>
+<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 
-<script src="assets/plugins/fancybox/jquery.fancybox.min.js"></script>
+<script src="{{ asset('plugins/fancybox/jquery.fancybox.min.js') }}"></script>
 
-<script src="assets/plugins/dropzone/dropzone.min.js"></script>
+<script src="{{ asset('plugins/dropzone/dropzone.min.js') }}"></script>
 
-<script src="assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
+<script src="{{ asset('plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js') }}"></script>
 
-<script src="assets/js/profile-settings.js"></script>
+<script src="{{ asset('js/profile-settings.js') }}"></script>
 
-<script src="assets/js/circle-progress.min.js"></script>
+<script src="{{ asset('js/circle-progress.min.js') }}"></script>
 
-<script src="assets/js/owl.carousel.min.js"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 
-<script src="assets/js/slick.js"></script>
+<script src="{{ asset('js/slick.js') }}"></script>
 
-<script src="assets/js/script.js"></script>
+<script src="{{ asset('js/script.js') }}"></script>
 
 <script>
     @if (session('notify'))

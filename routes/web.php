@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::view('/','welcome')->name('home');
 
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/auth/login', [LoginController::class, 'index'])->name('login');
+Route::post('/auth/login', [LoginController::class, 'store'])->name('login.store');
 
-Route::get('/signup', [RegisterController::class, 'index'])->name('register');
-Route::post('/signup', [RegisterController::class, 'create'])->name('register.create');
+Route::get('/auth/logout', [LogoutController::class, 'logout'])->name('auth.logout');
+
+Route::get('/auth/signup', [RegisterController::class, 'index'])->name('register');
+Route::post('/auth/signup', [RegisterController::class, 'create'])->name('register.create');
 
 Route::get('/auth/activation/{user}/{token}', [RegisterController::class, 'activate'])->name('auth.activate');
