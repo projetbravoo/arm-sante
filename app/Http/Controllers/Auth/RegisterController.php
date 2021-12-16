@@ -25,7 +25,7 @@ class RegisterController extends Controller
         $newUser = $this->userService->create($request);
 
         if($newUser) {
-            return redirect()->route('login')->with('notify', ['Account created, check mail for activation.', 'success', 7000]);
+            return redirect()->route('auth.login')->with('notify', ['Account created, check mail for activation.', 'success', 7000]);
         }
     }
 
@@ -34,8 +34,8 @@ class RegisterController extends Controller
         $isAccountActivated = $this->userService->activateUserAccount($user, $token);
 
         if($isAccountActivated === true) {
-            return redirect()->route('login')->with('notify', ['Account activated', 'success']);
+            return redirect()->route('auth.login')->with('notify', ['Account activated', 'success']);
         }
-        return redirect()->route('login')->with('notify', ['Invalid parameters', 'error']);
+        return redirect()->route('auth.login')->with('notify', ['Invalid parameters', 'error']);
     }
 }
