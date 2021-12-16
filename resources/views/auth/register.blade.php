@@ -10,7 +10,7 @@
             <div class="login-header">
                 <h3>Registration Form</h3>
             </div>
-            <form action="{{ route('register.create') }}" method="POST" autocomplete="off">
+            <form action="{{ route('auth.register.create') }}" method="POST" autocomplete="off">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -77,7 +77,7 @@
                     <label class="focus-label">Confirm Password</label>
                 </div>
                 <div class="text-right">
-                    <a class="forgot-link" href="{{ route('login') }}">Already have an account?</a>
+                    <a class="forgot-link" href="{{ route('auth.login') }}">Already have an account?</a>
                 </div>
                 <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Signup</button>
             </form>

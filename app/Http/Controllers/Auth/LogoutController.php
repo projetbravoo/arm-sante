@@ -11,6 +11,6 @@ class LogoutController extends Controller
     public function logout(Request $request, UserService $userService)
     {
         $userService->logout($request);
-        return redirect()->route('login');
+        return redirect()->route('auth.login');
     }
 }

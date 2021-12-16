@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Dashboard\DoctorDashboardController;
+use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +21,27 @@ use Illuminate\Support\Facades\Route;
 Route::view('/','welcome')->name('home');
 
 
-Route::get('/auth/login', [LoginController::class, 'index'])->name('login');
-Route::post('/auth/login', [LoginController::class, 'store'])->name('login.store');
 
-Route::get('/auth/logout', [LogoutController::class, 'logout'])->name('auth.logout');
+//Auth
+Route::group(['prefix' => 'auth', 'middleware' => 'preventBackHistory'], function() {
+    Route::group(['middleware' => 'guest'], function() {
+        Route::get('login', [LoginController::class, 'index'])->name('auth.login');
+        Route::post('login', [LoginController::class, 'store'])->name('auth.login.store');
 
-Route::get('/auth/signup', [RegisterController::class, 'index'])->name('register');
-Route::post('/auth/signup', [RegisterController::class, 'create'])->name('register.create');
+        Route::get('signup', [RegisterController::class, 'index'])->name('auth.register');
+        Route::post('signup', [RegisterController::class, 'create'])->name('auth.register.create');
+        
+        Route::get('activation/{user}/{token}', [RegisterController::class, 'activate'])->name('auth.activate');
+    });
 
-Route::get('/auth/activation/{user}/{token}', [RegisterController::class, 'activate'])->name('auth.activate');
+    Route::post('logout', [LogoutController::class, 'logout'])->name('auth.logout');
+});
+
+
+//Doctor
+Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'isDoctor', 'preventBackHistory']], function() {
+    Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
+
+    Route::get('profile-settings', [DoctorController::class, 'settings'])->name('doctor.settings');
+    Route::post('profile-settings', [DoctorController::class, 'update'])->name('doctor.update');
+});

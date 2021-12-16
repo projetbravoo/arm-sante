@@ -145,9 +145,38 @@
                     <p class="contact-header">Contact</p>
                     <p class="contact-info-header"> +1 315 369 5943</p>
                 </div>
+
+                @if (!Auth::check())
                 <li class="nav-item">
-                    <a class="nav-link header-login" href="{{ route('login') }}">login / Signup </a>
+                    <a class="nav-link header-login" href="{{ route('auth.login') }}">login / Signup </a>
                 </li>
+                @else
+                <li class="nav-item dropdown has-arrow logged-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <span class="user-img">
+                            <img class="rounded-circle" src="{{ asset('img/avatar/' . Auth::user()->avatar) }}" width="31" alt="Darren Elder">
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="{{ asset('img/avatar/' . Auth::user()->avatar) }}" alt="User Image" class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Darren Elder</h6>
+                                <p class="text-muted mb-0">Doctor</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="doctor-dashboard.html">Dashboard</a>
+                        <a class="dropdown-item" href="doctor-profile-settings.html">Profile Settings</a>
+                        <form action="{{ route('auth.logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </div>
+                </li>
+                @endif
+
             </li>
         </ul>
     </nav>

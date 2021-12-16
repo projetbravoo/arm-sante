@@ -6,6 +6,7 @@ use App\Http\Requests\UserLoginRequest;
 use App\Models\User;
 use Laravolt\Avatar\Avatar;
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -26,17 +27,6 @@ class UserService {
             'avatar' => $this->getUserAvatar($request->first_name . ' ' . $request->last_name),
             'verification_token' => $this->getVerificationToken($request->email . ',' . $request->last_name . ',' . $request->gender)
         ]);
-    }
-
-    public function getUserAvatar(string $username): string
-    {
-        $config = include(config_path('laravolt/avatar.php'));
-        return (new Avatar($config))->create($username)->save(storage_path('app/images/' . time() . '.png'))->basename;
-    }
-
-    public function getVerificationToken(string $data): string
-    {
-        return Crypt::encryptString($data);
     }
 
     public function activateUserAccount(User $user, string $token): bool
@@ -79,6 +69,30 @@ class UserService {
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+    }
+
+    /********** 
+     * Getters
+    **********/
+
+    public function getUserAvatar(string $username): string
+    {
+        $config = include(config_path('laravolt/avatar.php'));
+        return (new Avatar($config))->create($username)->save(public_path('assets/img/avatar/' . time() . '.png'))->basename;
+    }
+
+    public function getVerificationToken(string $data): string
+    {
+        return Crypt::encryptString($data);
+    }
+
+    public function getUserDashboardRoute(User $user): RedirectResponse
+    {
+        if ($user->profile == 'doctor') {
+            return redirect()->route('doctor.dashboard');
+        } elseif ($user->profile == 'patient') {
+            return redirect()->route('patient.dashboard');
+        }
     }
 
 }
