@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DoctorUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,5 +18,10 @@ class DoctorController extends Controller
         return view('doctor.settings', [
             'user' => Auth::user()
         ]);
+    }
+
+    public function update(DoctorUpdateRequest $request)
+    {
+        dd($request->all());
     }
 }

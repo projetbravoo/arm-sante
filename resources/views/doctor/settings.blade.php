@@ -28,30 +28,45 @@
                         <div class="form-group">
                             <label>First Name <span class="text-danger">*</span></label>
                             <input type="text" name="first_name" id="first_name" value="{{ $user->first_name }}" class="form-control">
+                            @error('first_name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Last Name <span class="text-danger">*</span></label>
                             <input type="text" name="last_name" id="last_name" value="{{ $user->last_name }}" class="form-control">
+                            @error('last_name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Email <span class="text-danger">*</span></label>
                             <input type="email" name="email" id="email" value="{{ $user->email }}" class="form-control" readonly>
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Gender <span class="text-danger">*</span></label>
                             <input type="text" name="gender" id="gender" value="{{ $user->gender }}" class="form-control" readonly>
+                            @error('gender')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Phone Number</label>
                             <input type="text" name="phone_number" id="phone_number" value="{{ $user->phone_number }}" class="form-control">
+                            @error('phone_number')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -60,24 +75,33 @@
     
         <div class="card contact-card">
             <div class="card-body">
-                <h4 class="card-title">Contact Details</h4>
+                <h4 class="card-title">Location Details</h4>
                 <div class="row form-row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">Country</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="country" id="country" class="form-control">
+                            @error('country')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">State / Province</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="state" id="state" class="form-control">
+                            @error('state')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">City</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="city" id="city" class="form-control">
+                            @error('city')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -89,7 +113,10 @@
                 <h4 class="card-title">About Me</h4>
                 <div class="form-group mb-0">
                     <label>Biography</label>
-                    <textarea class="form-control" rows="5"></textarea>
+                    <textarea class="form-control" name="biography" id="biography" rows="5"></textarea>
+                    @error('biography')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -102,13 +129,19 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Clinic Name</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="clinic_name" id="clinic_name" class="form-control">
+                            @error('clinic_name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Clinic Address</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="clinic_address" id="clinic_address" class="form-control">
+                            @error('clinic_address')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -133,8 +166,11 @@
                 </div>
                 <div class="row custom_price_cont" id="custom_price_cont" style="display: none;">
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="custom_rating_input" name="custom_rating_count" value="" placeholder="20">
+                        <input type="number" class="form-control" id="custom_rating_input" name="custom_rating_count" value="" placeholder="20">
                         <small class="form-text text-muted">Custom price you can add</small>
+                        @error('custom_rating_count')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -168,19 +204,28 @@
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>Degree</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="degree[]" id="degree" class="form-control">
+                                        @error('degree')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>College/Institute</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="institute[]" id="institute" class="form-control">
+                                        @error('institute')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>Year of Completion</label>
-                                        <input type="text" class="form-control">
+                                        <input type="number" name="completion_year[]" id="completion_year" value="" class="form-control">
+                                        @error('completion_year')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -204,25 +249,25 @@
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>Hospital Name</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="hospital_name[]" id="hospital_name" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>From</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="start_year[]" id="start_year" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>To</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="end_year[]" id="end_year" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>Designation</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="designation[]" id="designation" class="form-control">
                                     </div>
                                 </div>
                             </div>
