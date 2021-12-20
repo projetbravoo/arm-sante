@@ -6,9 +6,9 @@
                     <img src="{{ asset('img/avatar/' . Auth::user()->avatar) }}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                    <h3>Dr. Darren Elder</h3>
+                    <h3>Dr. {{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</h3>
                     <div class="patient-details">
-                        <h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
+                        <h5 class="mb-0">{{ Auth::user()->speciality != null ? Auth::user()->speciality : 'Generalist'}}</h5>
                     </div>
                 </div>
             </div>

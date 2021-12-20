@@ -26,7 +26,16 @@ class User extends Authenticatable
         'country',
         'state',
         'city',
-        'status',
+        'date_of_birth',
+        'blood_group',
+        'speciality',
+        'biography',
+        'clinic_name',
+        'clinic_address',
+        'services',
+        'specialization',
+        'price',
+        'active',
         'profile',
         'avatar',
         'password',
@@ -51,6 +60,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public $timestamps = false;
 }

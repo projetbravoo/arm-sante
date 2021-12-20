@@ -43,5 +43,5 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'isDoctor', 'preven
     Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
 
     Route::get('profile-settings', [DoctorController::class, 'settings'])->name('doctor.settings');
-    Route::post('profile-settings', [DoctorController::class, 'update'])->name('doctor.update');
+    Route::put('profile-settings', [DoctorController::class, 'update'])->name('doctor.update');
 });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddVerificationTokenToUsersTable extends Migration
+class CreateSpecialitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddVerificationTokenToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->longText('verification_token')->after('remember_token')->nullable();
+        Schema::create('specialities', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('image');
         });
     }
 
@@ -25,8 +27,6 @@ class AddVerificationTokenToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('verification_token');
-        });
+        Schema::dropIfExists('specialities');
     }
 }
