@@ -14,7 +14,7 @@ class AddVerificationTokenToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->longText('verification_token')->nullable();
+            $table->longText('verification_token')->after('remember_token')->nullable();
         });
     }
 

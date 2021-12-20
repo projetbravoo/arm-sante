@@ -30,18 +30,18 @@ class DoctorUpdateRequest extends FormRequest
             'gender' => 'filled',
             'phone_number' => 'nullable|numeric',
             
-            //'country' => 'required_with_all:state,city',
-            'state' => 'required_with:country',
+            'country' => 'required_with_all:state,city',
+            'state' => 'required_with_all:country,city',
             'city' => 'required_with_all:country,state',
             
             //'clinic_name' => 'require_with:clinic_address',
             'clinic_address' => 'required_with:clinic_name',
             
-            'custom_rating_count' => 'nullable|required_if:rating_option,custom_price|numeric|min:2|max:4',
+            'custom_rating_count' => 'nullable|required_if:rating_option,custom_price|numeric',
 
-            //'degree' => 'required_with:institute,completion_year',
+            'degree' => 'required_with_all:institute,completion_year',
             'institute' => 'required_with:degree',
-            'completion_year' => 'nullable|required_with_all:degree,institute|numeric|min:4|max:4'
+            'completion_year' => 'nullable|required_with_all:degree,institute'
         ];
     }
 }

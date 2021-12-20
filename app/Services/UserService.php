@@ -31,11 +31,11 @@ class UserService {
 
     public function activateUserAccount(User $user, string $token): bool
     {
-        if($user->status == '0' && !is_null($token) && !is_null($user->verification_token)) {
+        if($user->active == '0' && !is_null($token) && !is_null($user->verification_token)) {
             $tokensMatched = $this->verifyToken($user->verification_token, $token);
             
             if($tokensMatched) {
-                $user->update(['status' => '1', 'verification_token' => '']);
+                $user->update(['active' => '1', 'verification_token' => '']);
                 return true;
             }
         }
@@ -55,7 +55,7 @@ class UserService {
 
     public function login(UserLoginRequest $request): bool
     {
-        if(!Auth::attempt(Arr::add($request->only('email', 'password'), 'status', '1'))) {
+        if(!Auth::attempt(Arr::add($request->only('email', 'password'), 'active', '1'))) {
             return false;
         }
 

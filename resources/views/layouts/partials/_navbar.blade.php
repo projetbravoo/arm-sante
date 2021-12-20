@@ -163,8 +163,8 @@
                                 <img src="{{ asset('img/avatar/' . Auth::user()->avatar) }}" alt="User Image" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
-                                <h6>Darren Elder</h6>
-                                <p class="text-muted mb-0">Doctor</p>
+                                <h6>{{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</h6>
+                                <p class="text-muted mb-0">{{ ucfirst(Auth::user()->profile) }}</p>
                             </div>
                         </div>
                         <a class="dropdown-item" href="doctor-dashboard.html">Dashboard</a>
