@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -26,16 +27,9 @@ class User extends Authenticatable
         'country',
         'state',
         'city',
-        'date_of_birth',
-        'blood_group',
-        'speciality',
-        'biography',
-        'clinic_name',
-        'clinic_address',
-        'services',
-        'specialization',
-        'price',
         'active',
+        'userable_id',
+        'userable_type',
         'profile',
         'avatar',
         'password',
@@ -60,4 +54,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $timestamps = false;
+
+    protected $with = ['userable'];
+
+    public function userable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

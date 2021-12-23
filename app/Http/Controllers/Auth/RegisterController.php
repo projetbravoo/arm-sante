@@ -5,14 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use App\Services\DoctorService;
 use App\Services\UserService;
 
 class RegisterController extends Controller
 {
 
-    public function __construct(private UserService $user)
+    public function __construct(private UserService $userService)
     {
-        $this->userService = $user;
+        $this->userService = $userService;
     }
 
     public function index()
@@ -20,9 +21,9 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function create(UserRequest $request)
+    public function create(UserRequest $request, DoctorService $doctorService)
     {
-        $newUser = $this->userService->create($request);
+        $newUser = $this->userService->createDoctorUser($request, $doctorService);
 
         if($newUser) {
             return redirect()->route('auth.login')->with('notify', ['Account created, check mail for activation.', 'success', 7000]);

@@ -2,7 +2,7 @@
     <div class="profile-sidebar">
         <div class="widget-profile pro-widget-content">
             <div class="profile-info-widget">
-                <a href="#" class="booking-doc-img">
+                <a href="{{ route('doctor.dashboard') }}" class="booking-doc-img">
                     <img src="{{ asset('img/avatar/' . Auth::user()->avatar) }}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
@@ -17,7 +17,7 @@
             <nav class="dashboard-menu">
                 <ul>
                     <li class="active">
-                        <a href="doctor-dashboard.html">
+                        <a href="{{ route('doctor.dashboard') }}">
                             <i class="fas fa-columns"></i>
                             <span>Dashboard</span>
                         </a>

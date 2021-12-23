@@ -15,14 +15,13 @@ class CreateDoctorsTable extends Migration
     public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {
-            $table->foreignIdFor(User::class);
-            $table->string('specialty');
-            $table->longText('biography');
-            $table->json('services');
-            $table->json('specialization');
-            $table->integer('price');
-            $table->json('education');
-            $table->json('experience');
+            $table->id();
+            $table->string('speciality')->nullable();
+            $table->longText('biography')->nullable();
+            $table->string('services')->nullable();
+            $table->string('specialization')->nullable();
+            $table->integer('price')->nullable();
+            $table->json('education')->nullable();
             $table->timestamps();
         });
     }

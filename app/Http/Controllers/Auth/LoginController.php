@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
+use App\Models\Doctor;
+use App\Models\Patient;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +19,9 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        if(Auth()->user()->profile == 'doctor') {
+        if(Auth()->user()->userable_type == Doctor::class) {
             return route('doctor.dashboard');
-        } elseif(Auth()->user()->profile == 'patient') {
+        } elseif(Auth()->user()->userable_type == Patient::class) {
             return route('patient.dashoard');
         }
     }

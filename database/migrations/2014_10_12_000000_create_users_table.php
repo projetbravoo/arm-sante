@@ -23,23 +23,12 @@ class CreateUsersTable extends Migration
             $table->string('country')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
-            $table->date('date_of_birth')->nullable();
-            $table->string('blood_group', 3)->nullable();
-            $table->string('speciality')->nullable();
-            $table->longText('biography')->nullable();
-            $table->string('clinic_name')->nullable();
-            $table->string('clinic_address')->nullable();
-            $table->string('services')->nullable();
-            $table->string('specialization')->nullable();
-            $table->integer('price')->nullable();
-            $table->json('education')->nullable();
-            $table->json('experience')->nullable();
             $table->enum('active', ['0', '1'])->default('0');
-            $table->string('profile', 20);
+            $table->integer('userable_id');
+            $table->string('userable_type', 20);
             $table->string('avatar');
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
         });
     }
 

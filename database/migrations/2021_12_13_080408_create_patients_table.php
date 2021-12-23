@@ -15,9 +15,9 @@ class CreatePatientsTable extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->foreignIdFor(User::class);
-            $table->date('date_of_birth');
-            $table->string('blood_group', 3);
+            $table->id();
+            $table->date('date_of_birth')->nullable();
+            $table->string('blood_group', 3)->nullable();
             $table->timestamps();
         });
     }

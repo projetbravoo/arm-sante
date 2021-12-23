@@ -2,13 +2,20 @@
 
 namespace App\Services;
 
-use App\Http\Requests\DoctorUpdateRequest;
-use App\Models\Doctor;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Doctor;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\DoctorUpdateRequest;
 
 class DoctorService {
+
+    public function createDoctor(UserRequest $request): Doctor
+    {
+        return Doctor::create([
+            'speciality' => $request->speciality
+        ]);
+    }
 
     public function updateProfile(DoctorUpdateRequest $request, int $id): bool
     {
