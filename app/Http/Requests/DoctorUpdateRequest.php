@@ -29,12 +29,13 @@ class DoctorUpdateRequest extends FormRequest
             'email' => 'filled',
             'gender' => 'filled',
             'phone_number' => 'nullable|numeric',
+            'speciality' => 'filled',
             
             'country' => 'required_with_all:state,city',
             'state' => 'required_with_all:country,city',
             'city' => 'required_with_all:country,state',
             
-            //'clinic_name' => 'require_with:clinic_address',
+            'clinic_name' => 'required_with:clinic_address',
             'clinic_address' => 'required_with:clinic_name',
             
             'custom_rating_count' => 'nullable|required_if:rating_option,custom_price|numeric',

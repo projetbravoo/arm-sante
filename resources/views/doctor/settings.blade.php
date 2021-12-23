@@ -72,8 +72,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="speciality">Speciality</label>
-                            <input type="text" name="speciality" id="speciality" value="{{ $doctor->speciality }}" class="form-control">
+                            <label for="speciality">Speciality <span class="text-danger">*</span></label>
+                            <input type="text" name="speciality" id="speciality" value="{{ $doctor->userable->speciality }}" class="form-control">
+                            @error('speciality')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -120,14 +123,13 @@
                 <h4 class="card-title">About Me</h4>
                 <div class="form-group mb-0">
                     <label>Biography</label>
-                    <textarea class="form-control" name="biography" id="biography" rows="5">{{ $doctor->biography }}</textarea>
+                    <textarea class="form-control" name="biography" id="biography" rows="5">{{ $doctor->userable->biography }}</textarea>
                     @error('biography')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
         </div>
-    
     
         <div class="card">
             <div class="card-body">
@@ -136,7 +138,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Clinic Name</label>
-                            <input type="text" name="clinic_name" id="clinic_name" value="{{ ($doctor->clinic_name != null) ? $doctor->clinic_name : old('clinic_name') }}" class="form-control">
+                            <input type="text" name="clinic_name" id="clinic_name" value="{{ ($doctor->userable->clinic_name != null) ? $doctor->userable->clinic_name : old('clinic_name') }}" class="form-control">
                             @error('clinic_name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -145,7 +147,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Clinic Address</label>
-                            <input type="text" name="clinic_address" id="clinic_address" value="{{ ($doctor->clinic_address != null) ? $doctor->clinic_address : old('clinic_address') }}" class="form-control">
+                            <input type="text" name="clinic_address" id="clinic_address" value="{{ ($doctor->userable->clinic_address != null) ? $doctor->userable->clinic_address : old('clinic_address') }}" class="form-control">
                             @error('clinic_address')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -155,25 +157,24 @@
             </div>
         </div>
     
-    
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Pricing</h4>
                 <div class="form-group mb-0">
                     <div id="pricing_select">
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="price_free" name="rating_option" class="custom-control-input" value="price_free"  {{ ($doctor->price == 0) ? 'checked' : ''}}>
+                            <input type="radio" id="price_free" name="rating_option" class="custom-control-input" value="price_free"  {{ ($doctor->userable->price == 0) ? 'checked' : ''}}>
                             <label class="custom-control-label" for="price_free">Free</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="price_custom" name="rating_option" value="custom_price" class="custom-control-input" {{ $doctor->price > 0 ? 'checked' : '' }}>
+                            <input type="radio" id="price_custom" name="rating_option" value="custom_price" class="custom-control-input" {{ $doctor->userable->price > 0 ? 'checked' : '' }}>
                             <label class="custom-control-label" for="price_custom">Custom Price (per hour)</label>
                         </div>
                     </div>
                 </div>
-                <div class="row custom_price_cont" id="custom_price_cont" style="{{ ($doctor->price > 0) ? 'display: block;' : 'display: none;' }}">
+                <div class="row custom_price_cont" id="custom_price_cont" style="{{ ($doctor->userable->price > 0) ? 'display: block;' : 'display: none;' }}">
                     <div class="col-md-4">
-                        <input type="number" class="form-control" id="custom_rating_input" name="custom_rating_count" value="{{ $doctor->price }}" placeholder="20">
+                        <input type="number" class="form-control" id="custom_rating_input" name="custom_rating_count" value="{{ $doctor->userable->price }}" placeholder="20">
                         <small class="form-text text-muted">Custom price you can add</small>
                         @error('custom_rating_count')
                             <small class="text-danger">{{ $message }}</small>
@@ -183,25 +184,23 @@
             </div>
         </div>
     
-    
         <div class="card services-card">
             <div class="card-body">
                 <h4 class="card-title">Services and Specialization</h4>
                 <div class="form-group">
                     <label>Services</label>
-                    <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="{{ $doctor->services }}" id="services">
+                    <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="{{ $doctor->userable->services }}" id="services">
                     <small class="form-text text-muted">Note : Type & Press enter to add new services</small>
                 </div>
                 <div class="form-group mb-0">
                     <label>Specialization </label>
-                    <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialist" value="{{ $doctor->specialization }}" id="specialist">
+                    <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialist" value="{{ $doctor->userable->specialization }}" id="specialist">
                     <small class="form-text text-muted">Note : Type & Press enter to add new specialization</small>
                 </div>
             </div>
         </div>
     
-    
-        {{-- <div class="card">
+        <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Education</h4>
                 <div class="education-info">
@@ -210,8 +209,8 @@
                             <div class="row form-row">
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        <label>Degree</label>
-                                        <input type="text" name="degree[]" id="degree" class="form-control">
+                                        <label>Highest Degree</label>
+                                        <input type="text" name="degree" id="degree" value="{{ $doctorService->getEducation('degree') }}" class="form-control">
                                         @error('degree')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -220,7 +219,7 @@
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>College/Institute</label>
-                                        <input type="text" name="institute[]" id="institute" class="form-control">
+                                        <input type="text" name="institute" id="institute" value="{{ $doctorService->getEducation('institute') }}" class="form-control">
                                         @error('institute')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -229,7 +228,7 @@
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label>Year of Completion</label>
-                                        <input type="number" name="completion_year[]" id="completion_year" class="form-control">
+                                        <input type="number" name="completion_year" id="completion_year" value="{{ $doctorService->getEducation('completion_year') }}" class="form-control">
                                         @error('completion_year')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -239,53 +238,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="add-more">
-                    <a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
-                </div>
             </div>
-        </div> --}}
-    
-    
-        {{-- <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Experience</h4>
-                <div class="experience-info">
-                    <div class="row form-row experience-cont">
-                        <div class="col-12 col-md-10 col-lg-11">
-                            <div class="row form-row">
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        <label>Hospital Name</label>
-                                        <input type="text" name="hospital_name[]" id="hospital_name" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        <label>From</label>
-                                        <input type="text" name="start_year[]" id="start_year" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        <label>To</label>
-                                        <input type="text" name="end_year[]" id="end_year" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        <label>Designation</label>
-                                        <input type="text" name="designation[]" id="designation" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="add-more">
-                    <a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
-                </div>
-            </div>
-        </div> --}}
+        </div>
     
         <div class="submit-section submit-btn-bottom">
             <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>

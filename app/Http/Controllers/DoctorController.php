@@ -25,15 +25,18 @@ class DoctorController extends Controller
     {
         return view('doctor.settings', [
             'doctor' => Auth::user(),
+            'doctorService' => $this->doctorService
         ]);
     }
 
     public function update(DoctorUpdateRequest $request)
     {
-        $updateUser = $this->doctorService->updateProfile($request, Auth::user()->id);
+        $updateUser = $this->doctorService->updateDoctorProfile($request, Auth::user()->userable->id);
 
         if($updateUser) {
             return redirect()->route('doctor.dashboard')->with('notify', ['Profile Updated', 'success']);
         }
+
+        return back()->with('notify', ['An error has occor', 'error']);
     }
 }
