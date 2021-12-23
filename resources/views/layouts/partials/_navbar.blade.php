@@ -164,11 +164,11 @@
                             </div>
                             <div class="user-text">
                                 <h6>{{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</h6>
-                                <p class="text-muted mb-0">{{ ucfirst(Auth::user()->profile) }}</p>
+                                <p class="text-muted mb-0">{{ ucfirst(Auth::user()->userable->speciality) }}</p>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="doctor-dashboard.html">Dashboard</a>
-                        <a class="dropdown-item" href="doctor-profile-settings.html">Profile Settings</a>
+                        <a class="dropdown-item" href="{{ route('doctor.dashboard') }}">Dashboard</a>
+                        <a class="dropdown-item" href="{{ route('doctor.update') }}">Profile Settings</a>
                         <form action="{{ route('auth.logout') }}" method="post">
                             @csrf
                             <button type="submit" class="dropdown-item">Logout</button>

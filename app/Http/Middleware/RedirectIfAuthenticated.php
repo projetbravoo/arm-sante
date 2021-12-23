@@ -31,7 +31,6 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 return $this->userService->getUserDashboardRoute(Auth::user());
-                //return redirect(RouteServiceProvider::HOME);
             }
         }
 

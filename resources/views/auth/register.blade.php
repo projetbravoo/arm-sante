@@ -54,12 +54,12 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <select class="form-control select @error('profile') is-invalid @enderror" name="profile" id="profile">
-                                <option value="">You are a?</option>
-                                <option value="patient">Patient</option>
-                                <option value="doctor">Doctor</option>
+                            <select class="form-control select @error('speciality') is-invalid @enderror" name="speciality" id="speciality">
+                                <option value="">Your speciality?</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="salam">salam</option>
                             </select>
-                            @error('profile')
+                            @error('speciality')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

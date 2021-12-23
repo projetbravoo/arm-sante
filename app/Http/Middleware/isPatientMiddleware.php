@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Patient;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class isPatientMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->profile == 'patient') {
+        if (Auth::check() && Auth::user()->userable instanceof Patient) {
             return $next($request);
         }
 

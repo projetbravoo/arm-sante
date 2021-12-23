@@ -30,7 +30,6 @@ class UserRequest extends FormRequest
             'email' => 'required|email|unique:users,email',
             'phone_number' => 'nullable',
             'gender' => 'required',
-            'profile' => 'required',
             'password' => ['required', 'confirmed', Password::default()]
         ];
     }

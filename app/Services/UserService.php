@@ -6,6 +6,8 @@ use App\Http\Requests\UserLoginRequest;
 use App\Models\User;
 use Laravolt\Avatar\Avatar;
 use App\Http\Requests\UserRequest;
+use App\Models\Doctor;
+use App\Models\Patient;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -15,14 +17,13 @@ use Illuminate\Support\Facades\Crypt;
 
 class UserService {
 
-    public function create(UserRequest $request): User
+    public function createDoctorUser(UserRequest $request, DoctorService $doctorService): User
     {
-        return User::create([
+        return $doctorService->createDoctor($request)->user()->create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'gender' => $request->gender,
-            'profile' => $request->profile,
             'password' => Hash::make($request->password),
             'avatar' => $this->getUserAvatar($request->first_name . ' ' . $request->last_name),
             'verification_token' => $this->getVerificationToken($request->email . ',' . $request->last_name . ',' . $request->gender)
@@ -88,9 +89,9 @@ class UserService {
 
     public function getUserDashboardRoute(User $user): RedirectResponse
     {
-        if ($user->profile == 'doctor') {
+        if ($user->userable instanceof Doctor) {
             return redirect()->route('doctor.dashboard');
-        } elseif ($user->profile == 'patient') {
+        } elseif ($user->userable instanceof Patient) {
             return redirect()->route('patient.dashboard');
         }
     }
