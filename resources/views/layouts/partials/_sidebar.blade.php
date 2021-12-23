@@ -89,12 +89,6 @@
                             <span>Change Password</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="index.html">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span>Logout</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
         </div>

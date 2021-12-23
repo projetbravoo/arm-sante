@@ -18,6 +18,8 @@ class CreateDoctorsTable extends Migration
             $table->id();
             $table->string('speciality')->nullable();
             $table->longText('biography')->nullable();
+            $table->string('clinic_name')->nullable();
+            $table->string('clinic_address')->nullable();
             $table->string('services')->nullable();
             $table->string('specialization')->nullable();
             $table->integer('price')->nullable();
