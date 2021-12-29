@@ -4,7 +4,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DoctorDashboardController;
-use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\Doctor\DoctorAvailabilityContoller;
+use App\Http\Controllers\Doctor\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,11 @@ Route::group(['prefix' => 'auth', 'middleware' => 'preventBackHistory'], functio
 Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'isDoctor', 'preventBackHistory']], function() {
     Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
 
+    Route::get('profile', [DoctorController::class, 'profile'])->name('doctor.profile');
     Route::get('profile-settings', [DoctorController::class, 'settings'])->name('doctor.settings');
     Route::put('profile-settings', [DoctorController::class, 'update'])->name('doctor.update');
+
+    Route::get('schedule-timings', [DoctorAvailabilityContoller::class, 'create'])->name('doctor.availability.create');
+    Route::post('schedule-timings', [DoctorAvailabilityContoller::class, 'store'])->name('doctor.availability.store');
+    Route::put('schedule-timings', [DoctorAvailabilityContoller::class, 'update'])->name('doctor.availability.update');
 });

@@ -113,7 +113,7 @@
     </div>
 
 </footer>
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+{{-- <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 
 <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -143,6 +143,8 @@
 <script src="{{ asset('plugins/dropzone/dropzone.min.js') }}"></script>
 
 <script src="{{ asset('plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js') }}"></script>
+
+<script src="{{ asset('plugins/qcTimepicker/dist/qcTimepicker.min.js') }}"></script>
 
 <script src="{{ asset('js/profile-settings.js') }}"></script>
 

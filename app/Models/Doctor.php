@@ -25,4 +25,9 @@ class Doctor extends Model
     {
         return $this->morphOne(User::class, 'userable');
     }
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

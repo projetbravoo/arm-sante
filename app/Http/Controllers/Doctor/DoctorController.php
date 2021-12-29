@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Doctor;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorUpdateRequest;
 use App\Models\Doctor;
 use App\Services\DoctorService;
@@ -19,6 +20,14 @@ class DoctorController extends Controller
     public function dashboard()
     {
         return view('doctor.dashboard');
+    }
+
+    public function profile()
+    {
+        return view('doctor.profile', [
+            'doctor' => Auth::user(),
+            'doctorService' => $this->doctorService
+        ]);
     }
 
     public function settings()

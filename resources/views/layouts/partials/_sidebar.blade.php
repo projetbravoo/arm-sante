@@ -35,15 +35,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="schedule-timings.html">
+                        <a href="{{ route('doctor.availability.create') }}">
                             <i class="fas fa-hourglass-start"></i>
                             <span>Schedule Timings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="available-timings.html">
-                            <i class="fas fa-clock"></i>
-                            <span>Available Timings</span>
                         </a>
                     </li>
                     <li>

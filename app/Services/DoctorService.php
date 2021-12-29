@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\DoctorUpdateRequest;
 use App\Models\Doctor;
 use App\Models\User;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -49,12 +50,17 @@ class DoctorService {
         };
     }
 
-    public function getSpecialities()
+    public function getDoctorServices(string $services): array
+    {
+        return explode(',', $services);
+    }
+
+    public function getSpecialities(): Collection
     {
         return DB::table('specialities')->get();
     }
 
-    public function getSpecialitiesAsOptionsForDropDown()
+    public function getSpecialitiesAsOptionsForDropDown(): void
     {
         foreach($this->getSpecialities() as $speciality)
         {

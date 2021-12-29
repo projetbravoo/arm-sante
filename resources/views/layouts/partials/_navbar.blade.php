@@ -168,7 +168,7 @@
                             </div>
                         </div>
                         <a class="dropdown-item" href="{{ route('doctor.dashboard') }}">Dashboard</a>
-                        <a class="dropdown-item" href="{{ route('doctor.update') }}">Profile Settings</a>
+                        <a class="dropdown-item" href="{{ route('doctor.profile') }}">Profile</a>
                         <form action="{{ route('auth.logout') }}" method="post">
                             @csrf
                             <button type="submit" class="dropdown-item">Logout</button>
