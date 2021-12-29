@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\DoctorUpdateRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\Doctor;
 use App\Models\User;
 use Illuminate\Support\Collection;
@@ -10,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DoctorService {
+
+    public function createNewDoctor(string $speciality): Doctor
+    {
+        return Doctor::create([
+            'speciality' => $speciality
+        ]);
+    }
 
     public function updateDoctorProfile(DoctorUpdateRequest $request, int $id): bool
     {
@@ -39,15 +47,18 @@ class DoctorService {
         return false;
     }
 
-    public function getEducation(string $property): string
+    public function getEducation(?string $property): ?string
     {
-        $education = json_decode(Auth()->user()->userable->education);
-        
-        return match($property) {
-            'degree' => $education[0],
-            'institute' => $education[1],
-            'completion_year' => $education[2]
-        };
+        if (Auth()->user()->userable->education !== null) {
+            $education = json_decode(Auth()->user()->userable->education);
+    
+            return match($property) {
+                'degree' => $education[0],
+                'institute' => $education[1],
+                'completion_year' => $education[2]
+            };
+        }
+        return null;
     }
 
     public function getDoctorServices(string $services): array

@@ -8,6 +8,8 @@ use Laravolt\Avatar\Avatar;
 use App\Http\Requests\UserRequest;
 use App\Models\Doctor;
 use App\Models\Patient;
+use App\Services\Users\PatientService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -17,9 +19,11 @@ use Illuminate\Support\Facades\Crypt;
 
 class UserService {
 
-    public function createDoctorUser(UserRequest $request, DoctorService $doctorService): User
+    public function createNewUser(UserRequest $request, string $userType, DoctorService|PatientService $service): User
     {
-        return $doctorService->createDoctor($request)->user()->create([
+        $newUser = $this->getNewUserModel($request, $userType, $service);
+
+        return $newUser->user()->create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
@@ -30,26 +34,15 @@ class UserService {
         ]);
     }
 
-    public function activateUserAccount(User $user, string $token): bool
+    public static function activateUserAccount(User $user, string $token): bool
     {
-        if($user->active == '0' && !is_null($token) && !is_null($user->verification_token)) {
-            $tokensMatched = $this->verifyToken($user->verification_token, $token);
+        if(($user->active == '0' && !is_null($user->verification_token)) && !is_null($token)) {
+            $tokensMatched = self::verifyToken($user->verification_token, $token);
             
             if($tokensMatched) {
                 $user->update(['active' => '1', 'verification_token' => '']);
                 return true;
             }
-        }
-        return false;
-    }
-
-    private function verifyToken(string $userToken, string $token): bool
-    {
-        $decryptedUserToken = Crypt::decryptString($userToken);
-        $decryptedToken = Crypt::decryptString($token);
-
-        if($decryptedToken === $decryptedUserToken) {
-            return true;
         }
         return false;
     }
@@ -96,4 +89,25 @@ class UserService {
         }
     }
 
+
+    //PRIVATE
+    private static function verifyToken(string $userToken, string $token): bool
+    {
+        $decryptedUserToken = Crypt::decryptString($userToken);
+        $decryptedToken = Crypt::decryptString($token);
+
+        if($decryptedToken === $decryptedUserToken) {
+            return true;
+        }
+        return false;
+    }
+
+    private function getNewUserModel(UserRequest $request, string $userType, DoctorService|PatientService $service): Model
+    {
+        if($userType === Doctor::class) {
+           return $service->createNewDoctor($request->speciality);
+        }else {
+           return $service->createNewPatient($request->date_of_birth);
+        }
+    }
 }

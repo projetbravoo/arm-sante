@@ -8,9 +8,9 @@
         </div>
         <div class="col-md-12 col-lg-6 login-right">
             <div class="login-header">
-                <h3>Doctor Registration</h3>
+                <h3>Patient Registration <a href="{{ route('auth.doctor.register') }}">I'm a Doctor!</a></h3>
             </div>
-            <form action="{{ route('auth.doctor.register') }}" method="POST" autocomplete="off">
+            <form action="{{ route('auth.patient.register') }}" method="POST" autocomplete="off">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -53,15 +53,9 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <select class="form-control select @error('speciality') is-invalid @enderror" name="speciality" id="speciality">
-                                <option value="">Your speciality?</option>
-                                <option value="dentist">Dentist</option>
-                                <option value="salam">salam</option>
-                            </select>
-                            @error('speciality')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                        <div class="form-group form-focus">
+                            <input type="date" name="date_of_birth" id="date_of_birth" class="form-control">
+                            <label class="focus-label" for="date_of_birth">Date of birth</label>
                         </div>
                     </div>
                 </div>

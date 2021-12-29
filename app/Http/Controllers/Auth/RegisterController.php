@@ -18,7 +18,7 @@ class RegisterController extends Controller
 
     public function index()
     {
-        return view('auth.register');
+        return view('auth.doctor-signup');
     }
 
     public function create(UserRequest $request, DoctorService $doctorService)
