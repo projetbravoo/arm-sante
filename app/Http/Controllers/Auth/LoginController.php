@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
 
-    public function index()
+    public function create()
     {
         return view('auth.login');
     }

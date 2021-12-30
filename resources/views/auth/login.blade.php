@@ -15,7 +15,7 @@
                     {{ session('error') }}
                 </div>
             @endif
-            <form action="{{ route('auth.login.store') }}" method="POST">
+            <form action="{{ route('auth.login') }}" method="POST">
                 @csrf
                 <div class="form-group form-focus">
                     <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control floating @error('email') is-invalid @enderror">
@@ -35,7 +35,7 @@
                     <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
                 </div>
                 <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Login</button>
-                <div class="text-center dont-have">Don’t have an account? <a href="{{ route('auth.register') }}">Register</a></div>
+                <div class="text-center dont-have">Don’t have an account? <a href="{{ route('auth.patient.register') }}">Register</a></div>
             </form>
         </div>
     </div>
