@@ -2,14 +2,25 @@
     <div class="profile-sidebar">
         <div class="widget-profile pro-widget-content">
             <div class="profile-info-widget">
-                <a href="{{ route('doctor.dashboard') }}" class="booking-doc-img">
+                <a href="{{ isDoctor() ? route('doctor.dashboard') : route('patient.dashboard') }}" class="booking-doc-img">
                     <img src="{{ asset('img/avatar/' . Auth::user()->avatar) }}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                    <h3>Dr. {{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</h3>
-                    <div class="patient-details">
-                        <h5 class="mb-0">{{ Auth::user()->speciality != null ? Auth::user()->speciality : 'Generalist'}}</h5>
-                    </div>
+                    @if (isDoctor())
+                        <h3>Dr. {{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</h3>
+                        <div class="patient-details">
+                            <h5 class="mb-0">{{ Auth::user()->speciality != null ? Auth::user()->speciality : 'Generalist'}}</h5>
+                        </div>
+                    @endif
+                    @if (isPatient())
+                        <h3>{{ ucwords(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</h3>
+                        <div class="patient-details">
+                            <h5><i class="fas fa-birthday-cake"></i> {{  \Carbon\Carbon::parse(Auth::user()->userable->date_of_birth)->format('d M Y'); }}, {{ \Carbon\Carbon::parse(Auth::user()->userable->date_of_birth)->age }} years</h5>
+                            @if (Auth::user()->country != null)
+                            <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{ Auth::user()->city . ', ' . Auth::user()->country }}</h5>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -17,11 +28,12 @@
             <nav class="dashboard-menu">
                 <ul>
                     <li class="active">
-                        <a href="{{ route('doctor.dashboard') }}">
+                        <a href="{{ isDoctor() ? route('doctor.dashboard') : route('patient.dashboard') }}">
                             <i class="fas fa-columns"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    @if (isDoctor())
                     <li>
                         <a href="appointments.html">
                             <i class="fas fa-calendar-check"></i>
@@ -58,23 +70,11 @@
                             <span>Reviews</span>
                         </a>
                     </li>
+                    @endif
                     <li>
-                        <a href="chat-doctor.html">
-                            <i class="fas fa-comments"></i>
-                            <span>Message</span>
-                            <small class="unread-msg">23</small>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('doctor.settings') }}">
+                        <a href="{{ isDoctor() ? route('doctor.settings') : route('patient.edit') }}">
                             <i class="fas fa-user-cog"></i>
                             <span>Profile Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="social-media.html">
-                            <i class="fas fa-share-alt"></i>
-                            <span>Social Media</span>
                         </a>
                     </li>
                     <li>

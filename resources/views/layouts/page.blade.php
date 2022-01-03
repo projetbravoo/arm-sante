@@ -8,12 +8,8 @@
     @include('layouts.partials._breadcrumb')
 
     <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                @include('layouts.partials._sidebar')
-
-                @yield('content')
-            </div>
+        <div class="container">
+            @yield('content')
         </div>
     </div>
 

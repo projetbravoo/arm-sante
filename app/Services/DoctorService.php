@@ -43,8 +43,6 @@ class DoctorService {
             'specialization' => $request->specialist,
             'education' => json_encode([$request->degree, $request->institute, $request->completion_year])
         ]);
-
-        return false;
     }
 
     public function getEducation(?string $property): ?string
