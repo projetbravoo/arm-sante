@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Doctor;
+use App\Models\Patient;
+
 if(!function_exists('notify')) {
     function notify(array $params): string
     {
@@ -18,4 +21,18 @@ if(!function_exists('notify')) {
           title: '$params[0]'
         })";
     }
+}
+
+if(!function_exists('isDoctor')) {
+  function isDoctor(): bool
+  {
+    return Auth()->user()->userable instanceof Doctor;
+  }
+}
+
+if(!function_exists('isPatient')) {
+  function isPatient(): bool
+  {
+    return Auth()->user()->userable instanceof Patient;  
+  }
 }

@@ -9,6 +9,6 @@ class PatientDashboardController extends Controller
 {
     public function index()
     {
-        echo "Hello World";
+        return view('patient.dashboard');
     }
 }

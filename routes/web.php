@@ -5,10 +5,10 @@ use App\Http\Controllers\Auth\DoctorRegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PatientRegisterController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Doctor\DoctorAvailabilityContoller;
 use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Patient\PatientDashboardController;
+use App\Http\Controllers\Patient\PatientProfileSettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,4 +62,7 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'isDoctor', 'preven
 //Patient
 Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'isPatient', 'preventBackHistory']], function () {
     Route::get('dashboard', [PatientDashboardController::class, 'index'])->name('patient.dashboard');
+
+    Route::get('profile-settings', [PatientProfileSettingController::class, 'edit'])->name('patient.edit');
+    Route::put('profile-settings', [PatientProfileSettingController::class, 'update'])->name('patient.update');
 });
